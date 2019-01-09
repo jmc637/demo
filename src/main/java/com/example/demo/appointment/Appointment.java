@@ -10,14 +10,17 @@ import javax.persistence.PrePersist;
 import java.math.BigDecimal;
 import java.time.Period;
 import java.util.Date;
+import java.util.function.Consumer;
 
 @Data
 @Entity
 @NoArgsConstructor
 class Appointment {
 
+//    Not editable from api
     private @Id @GeneratedValue Long id;
 
+//    Not editable from api
     private Date createdAt;
 
     private Date appointmentStartDate;
@@ -26,7 +29,7 @@ class Appointment {
 
     private String nameOfDoctor;
 
-    private boolean status;
+    private Boolean status;
 
     private BigDecimal price;
 
