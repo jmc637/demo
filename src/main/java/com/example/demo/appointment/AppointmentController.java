@@ -3,7 +3,6 @@ package com.example.demo.appointment;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +30,7 @@ class AppointmentController {
             if(dateStart.compareTo(dateEnd) > 0) {
                 throw new DateBoundIncorrectException();
             }
-            return repository.findAppointmentsBetweenDateTimes(dateStart, dateEnd, priceLowerBound, priceUpperBound);
+            return repository.findAppointmentsBetweenDateTimesAndPrices(dateStart, dateEnd, priceLowerBound, priceUpperBound);
         } else {
             return repository.findAll();
         }

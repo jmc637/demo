@@ -15,5 +15,5 @@ interface AppointmentRepository extends JpaRepository<Appointment, Long> {
             "WHERE ((a.appointmentStartDate BETWEEN ?1 AND ?2) OR (a.appointmentEndDate BETWEEN ?1 AND ?2) OR (a.appointmentStartDate <= ?1 AND a.appointmentEndDate >= ?2)) " +
 //            This line is to further filter by price range
             "AND (a.price BETWEEN ?3 AND ?4)")
-    List<Appointment> findAppointmentsBetweenDateTimes(Date dateStart, Date dateEnd, BigDecimal priceLowerBound, BigDecimal priceUpperBound);
+    List<Appointment> findAppointmentsBetweenDateTimesAndPrices(Date dateStart, Date dateEnd, BigDecimal priceLowerBound, BigDecimal priceUpperBound);
 }

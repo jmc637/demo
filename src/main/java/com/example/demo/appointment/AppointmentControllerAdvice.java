@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+// To handle exceptions thrown in controller and send useful messages to users of api
 @ControllerAdvice
 class AppointmentControllerAdvice {
 
