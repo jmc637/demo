@@ -8,9 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import java.math.BigDecimal;
-import java.time.Period;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.function.Consumer;
 
 @Data
 @Entity
@@ -23,9 +22,9 @@ class Appointment {
 //    Not editable from api
     private Date createdAt;
 
-    private Date appointmentStartDate;
+    private LocalDateTime appointmentStartDateTime;
 
-    private Date appointmentEndDate;
+    private LocalDateTime appointmentEndDateTime;
 
     private String nameOfDoctor;
 
@@ -38,9 +37,9 @@ class Appointment {
         this.createdAt = new Date();
     }
 
-    Appointment(Date appointmentStartDate, Date appointmentEndDate, String nameOfDoctor, boolean status, BigDecimal price) {
-        this.appointmentStartDate = appointmentStartDate;
-        this.appointmentEndDate = appointmentEndDate;
+    Appointment(LocalDateTime appointmentStartDate, LocalDateTime appointmentEndDateTime, String nameOfDoctor, boolean status, BigDecimal price) {
+        this.appointmentStartDateTime = appointmentStartDate;
+        this.appointmentEndDateTime = appointmentEndDateTime;
         this.nameOfDoctor = nameOfDoctor;
         this.status = status;
         this.price = price;

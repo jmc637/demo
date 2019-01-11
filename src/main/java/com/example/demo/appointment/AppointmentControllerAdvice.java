@@ -18,9 +18,9 @@ class AppointmentControllerAdvice {
     }
 
     @ResponseBody
-    @ExceptionHandler(DateBoundIncorrectException.class)
+    @ExceptionHandler(DateTimeBoundIncorrectException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    String dateBoundInccorectHandler(DateBoundIncorrectException e) {
+    String dateTimeBoundIncorrectHandler(DateTimeBoundIncorrectException e) {
         return e.getMessage();
     }
 

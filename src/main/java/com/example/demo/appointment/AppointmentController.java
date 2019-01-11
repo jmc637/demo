@@ -4,8 +4,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -20,16 +20,16 @@ class AppointmentController {
 
     @GetMapping("/appointments")
     List<Appointment> getAppointments(
-            @RequestParam(value = "dateStart", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateStart,
-            @RequestParam(value = "dateEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateEnd
+            @RequestParam(value = "dateTimeStart", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTimeStart,
+            @RequestParam(value = "dateTimeEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTimeEnd
     ) {
 //        In this case we have all query params we need to do search with a date range and price range. This is assumes
 //        we need all query params but this could be made more flexible in future.
-        if(dateStart != null && dateEnd != null) {
-            if(dateStart.compareTo(dateEnd) > 0) {
-                throw new DateBoundIncorrectException();
+        if(dateTimeStart != null && dateTimeEnd != null) {
+            if(dateTimeStart.compareTo(dateTimeEnd) > 0) {
+                throw new DateTimeBoundIncorrectException();
             }
-            return repository.findAppointmentsBetweenDateTimesAndPrices(dateStart, dateEnd, new Sort(Sort.Direction.ASC, "price"));
+            return repository.findAppointmentsBetweenDateTimesAndPrices(dateTimeStart, dateTimeEnd, new Sort(Sort.Direction.ASC, "price"));
         } else {
             return repository.findAll();
         }
@@ -51,10 +51,10 @@ class AppointmentController {
         return repository.findById(id)
                 .map(appointment -> {
 //                    Many null checks in case user sends fields that are blank. Looking for way to refactor...
-                    if(newAppointment.getAppointmentStartDate() != null)
-                        appointment.setAppointmentStartDate(newAppointment.getAppointmentStartDate());
-                    if(newAppointment.getAppointmentEndDate() != null)
-                        appointment.setAppointmentEndDate(newAppointment.getAppointmentEndDate());
+                    if(newAppointment.getAppointmentStartDateTime() != null)
+                        appointment.setAppointmentStartDateTime(newAppointment.getAppointmentStartDateTime());
+                    if(newAppointment.getAppointmentEndDateTime() != null)
+                        appointment.setAppointmentEndDateTime(newAppointment.getAppointmentEndDateTime());
                     if(newAppointment.getNameOfDoctor() != null)
                         appointment.setNameOfDoctor(newAppointment.getNameOfDoctor());
                     if(newAppointment.getStatus() != null)
