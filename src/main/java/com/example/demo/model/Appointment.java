@@ -1,4 +1,4 @@
-package com.example.demo.appointment;
+package com.example.demo.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @Entity
 @NoArgsConstructor
-class Appointment {
+public class Appointment {
 
 //    Not editable from api
     private @Id @GeneratedValue Long id;
@@ -37,7 +37,7 @@ class Appointment {
         this.createdAt = new Date();
     }
 
-    Appointment(LocalDateTime appointmentStartDate, LocalDateTime appointmentEndDateTime, String nameOfDoctor, boolean status, BigDecimal price) {
+    public Appointment(LocalDateTime appointmentStartDate, LocalDateTime appointmentEndDateTime, String nameOfDoctor, boolean status, BigDecimal price) {
         this.appointmentStartDateTime = appointmentStartDate;
         this.appointmentEndDateTime = appointmentEndDateTime;
         this.nameOfDoctor = nameOfDoctor;

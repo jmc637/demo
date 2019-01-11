@@ -1,15 +1,18 @@
-package com.example.demo.appointment;
+package com.example.demo.controller;
 
+import com.example.demo.controller.exception.AppointmentNotFoundException;
+import com.example.demo.repository.AppointmentRepository;
+import com.example.demo.controller.exception.DateTimeBoundIncorrectException;
+import com.example.demo.model.Appointment;
 import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-class AppointmentController {
+public class AppointmentController {
 
     private final AppointmentRepository repository;
 

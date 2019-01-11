@@ -1,5 +1,7 @@
-package com.example.demo.appointment;
+package com.example.demo.scheduling;
 
+import com.example.demo.model.Appointment;
+import com.example.demo.repository.AppointmentRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -9,7 +11,7 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
-class RandomAppointmentCreatorTask implements Runnable {
+public class RandomAppointmentCreatorTask implements Runnable {
 
     private final Random random = new Random();
 
@@ -17,7 +19,7 @@ class RandomAppointmentCreatorTask implements Runnable {
 
     private final AppointmentRepository appointmentRepository;
 
-    RandomAppointmentCreatorTask(AppointmentRepository appointmentRepository) {
+    public RandomAppointmentCreatorTask(AppointmentRepository appointmentRepository) {
         this.appointmentRepository  = appointmentRepository;
     }
 

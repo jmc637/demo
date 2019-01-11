@@ -1,5 +1,7 @@
-package com.example.demo.appointment;
+package com.example.demo.configuration;
 
+import com.example.demo.repository.AppointmentRepository;
+import com.example.demo.scheduling.RandomAppointmentCreatorTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
