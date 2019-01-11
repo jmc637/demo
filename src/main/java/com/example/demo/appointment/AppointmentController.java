@@ -1,5 +1,6 @@
 package com.example.demo.appointment;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +21,15 @@ class AppointmentController {
     @GetMapping("/appointments")
     List<Appointment> getAppointments(
             @RequestParam(value = "dateStart", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateStart,
-            @RequestParam(value = "dateEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateEnd,
-            @RequestParam(value = "price[gte]", required = false) BigDecimal priceLowerBound,
-            @RequestParam(value = "price[lte]", required = false) BigDecimal priceUpperBound
+            @RequestParam(value = "dateEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateEnd
     ) {
 //        In this case we have all query params we need to do search with a date range and price range. This is assumes
 //        we need all query params but this could be made more flexible in future.
-        if(dateStart != null && dateEnd != null && priceLowerBound != null && priceUpperBound != null) {
+        if(dateStart != null && dateEnd != null) {
             if(dateStart.compareTo(dateEnd) > 0) {
                 throw new DateBoundIncorrectException();
             }
-            return repository.findAppointmentsBetweenDateTimesAndPrices(dateStart, dateEnd, priceLowerBound, priceUpperBound);
+            return repository.findAppointmentsBetweenDateTimesAndPrices(dateStart, dateEnd, new Sort(Sort.Direction.ASC, "price"));
         } else {
             return repository.findAll();
         }
