@@ -14,5 +14,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
             "FROM Appointment a " +
 //            This line is to get all apppointments between or within this date range
             "WHERE ((a.appointmentStartDateTime BETWEEN ?1 AND ?2) OR (a.appointmentEndDateTime BETWEEN ?1 AND ?2) OR (a.appointmentStartDateTime <= ?1 AND a.appointmentEndDateTime >= ?2)) ")
-    List<Appointment> findAppointmentsBetweenDateTimesAndPrices(LocalDateTime dateStartTime, LocalDateTime dateEndTime, Sort sort);
+    List<Appointment> findAppointmentsBetweenDateTimes(LocalDateTime dateStartTime, LocalDateTime dateEndTime, Sort sort);
 }

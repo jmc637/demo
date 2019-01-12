@@ -26,13 +26,13 @@ public class AppointmentController {
             @RequestParam(value = "dateTimeStart", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTimeStart,
             @RequestParam(value = "dateTimeEnd", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTimeEnd
     ) {
-//        In this case we have all query params we need to do search with a date range and price range. This is assumes
+//        In this case we have all query params we need to do search within a date range. This is assumes
 //        we need all query params but this could be made more flexible in future.
         if(dateTimeStart != null && dateTimeEnd != null) {
             if(dateTimeStart.compareTo(dateTimeEnd) > 0) {
                 throw new DateTimeBoundIncorrectException();
             }
-            return repository.findAppointmentsBetweenDateTimesAndPrices(dateTimeStart, dateTimeEnd, new Sort(Sort.Direction.ASC, "price"));
+            return repository.findAppointmentsBetweenDateTimes(dateTimeStart, dateTimeEnd, new Sort(Sort.Direction.ASC, "price"));
         } else {
             return repository.findAll();
         }
@@ -53,7 +53,7 @@ public class AppointmentController {
     Appointment updateAppointment(@RequestBody Appointment newAppointment, @PathVariable Long id) {
         return repository.findById(id)
                 .map(appointment -> {
-//                    Many null checks in case user sends fields that are blank. Looking for way to refactor...
+//                    Many null checks in case user sends fields that are blank
                     if(newAppointment.getAppointmentStartDateTime() != null)
                         appointment.setAppointmentStartDateTime(newAppointment.getAppointmentStartDateTime());
                     if(newAppointment.getAppointmentEndDateTime() != null)
