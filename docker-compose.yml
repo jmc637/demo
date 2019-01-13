@@ -1,0 +1,13 @@
+version: '2.2'
+services:
+  demo:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: demoservice
+    ports:
+      - 8080
+    networks:
+      - network1
+networks:
+  network1:

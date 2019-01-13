@@ -1,5 +1,9 @@
-FROM openjdk:8-jdk-alpine
-COPY ./target/demo-0.0.1-SNAPSHOT.jar /usr/src/demo/
-WORKDIR /usr/src/demo
+FROM maven:3.5.3-jdk-8-slim
+WORKDIR /usr/src/java-code
+COPY . /usr/src/java-code/
+RUN mvn package
+
+WORKDIR /usr/src/java-app
+RUN cp /usr/src/java-code/target/*.jar ./app.jar
 EXPOSE 8080
-CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
